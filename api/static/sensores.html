@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HidroAlerta · Sensores e alertas</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div class="logo">Hidro<span>Alerta</span></div>
+  <nav aria-label="Telas">
+    <a href="/">Mapa e rota segura</a><a href="/sensores">Sensores e alertas</a>
+    <a href="/dashboard">Dashboard</a><a href="/historico">Histórico e simulação</a>
+  </nav>
+</header>
+<main>
+  <h1>Painel de sensores e alertas</h1>
+  <p class="sub">Cada ponto tem 2 sensores IoT: nível d'água (cm) e pluviômetro (mm/h). Leituras a cada 5 minutos.</p>
+
+  <div class="card" style="margin-bottom:16px">
+    <h2>Ao vivo (POST /api/ingest)</h2>
+    <p class="muted" id="vivo-vazio">Nenhum dispositivo enviando agora. Rode <code>python -m iot.sensor_sim --post http://localhost:8000 --token SEU_TOKEN</code> para transmitir.</p>
+    <table id="vivo" hidden>
+      <thead><tr><th>Ponto</th><th>Recebido</th><th>Nível</th><th>Chuva</th><th>Tendência 15 min</th><th>Risco (IA)</th><th>Alerta</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h2>Série do sensor</h2>
+      <div class="controles">
+        <label>Ponto <select id="ponto"></select></label>
+      </div>
+      <div class="chart-box"><canvas id="grafico" aria-label="Nível d'água e chuva ao longo do dia" role="img"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Últimos alertas emitidos</h2>
+      <div id="alertas"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h2>Leituras no pico da chuva (<span id="hora-pico"></span>)</h2>
+    <table id="tabela">
+      <thead><tr><th>Ponto</th><th>Bairro</th><th>Nível (cm)</th><th>Chuva (mm/h)</th><th>Risco (IA)</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="/static/app.js"></script>
+<script src="/static/sensores.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+|--- nivel_cm <= 23.12
+|   |--- chuva_mm_h <= 12.67
+|   |   |--- chuva_mm_h <= 9.43
+|   |   |   |--- class: BAIXO
+|   |   |--- chuva_mm_h >  9.43
+|   |   |   |--- chuva_mm_h <= 9.58
+|   |   |   |   |--- class: MEDIO
+|   |   |   |--- chuva_mm_h >  9.58
+|   |   |   |   |--- class: BAIXO
+|   |--- chuva_mm_h >  12.67
+|   |   |--- nivel_cm <= 15.73
+|   |   |   |--- tendencia_15min_cm <= -1.52
+|   |   |   |   |--- class: BAIXO
+|   |   |   |--- tendencia_15min_cm >  -1.52
+|   |   |   |   |--- class: BAIXO
+|   |   |--- nivel_cm >  15.73
+|   |   |   |--- chuva_acum_1h_mm <= 11.57
+|   |   |   |   |--- tendencia_15min_cm <= 8.58
+|   |   |   |   |   |--- class: MEDIO
+|   |   |   |   |--- tendencia_15min_cm >  8.58
+|   |   |   |   |   |--- class: BAIXO
+|   |   |   |--- chuva_acum_1h_mm >  11.57
+|   |   |   |   |--- chuva_mm_h <= 13.77
+|   |   |   |   |   |--- class: BAIXO
+|   |   |   |   |--- chuva_mm_h >  13.77
+|   |   |   |   |   |--- class: BAIXO
+|--- nivel_cm >  23.12
+|   |--- nivel_cm <= 79.65
+|   |   |--- tendencia_15min_cm <= 13.74
+|   |   |   |--- nivel_cm <= 49.99
+|   |   |   |   |--- tendencia_15min_cm <= 5.29
+|   |   |   |   |   |--- class: BAIXO
+|   |   |   |   |--- tendencia_15min_cm >  5.29
+|   |   |   |   |   |--- class: MEDIO
+|   |   |   |--- nivel_cm >  49.99
+|   |   |   |   |--- tendencia_15min_cm <= 9.92
+|   |   |   |   |   |--- class: MEDIO
+|   |   |   |   |--- tendencia_15min_cm >  9.92
+|   |   |   |   |   |--- class: MEDIO
+|   |   |--- tendencia_15min_cm >  13.74
+|   |   |   |--- tendencia_15min_cm <= 17.35
+|   |   |   |   |--- chuva_mm_h <= 44.40
+|   |   |   |   |   |--- class: MEDIO
+|   |   |   |   |--- chuva_mm_h >  44.40
+|   |   |   |   |   |--- class: ALTO
+|   |   |   |--- tendencia_15min_cm >  17.35
+|   |   |   |   |--- class: ALTO
+|   |--- nivel_cm >  79.65
+|   |   |--- nivel_cm <= 80.06
+|   |   |   |--- class: ALTO
+|   |   |--- nivel_cm >  80.06
+|   |   |   |--- class: ALTO

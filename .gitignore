@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+bigdata/lake/raw/ao_vivo.jsonl
+docs/mensagem-matheus.md

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HidroAlerta · Mapa de risco e rota segura</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div class="logo">Hidro<span>Alerta</span></div>
+  <nav aria-label="Telas">
+    <a href="/">Mapa e rota segura</a><a href="/sensores">Sensores e alertas</a>
+    <a href="/dashboard">Dashboard</a><a href="/historico">Histórico e simulação</a>
+  </nav>
+</header>
+<main>
+  <h1>Mapa de risco e rota segura</h1>
+  <p class="sub">Arraste a linha do tempo para ver a chuva chegando. A IA classifica cada ponto e o sistema recalcula o caminho evitando vias alagadas.</p>
+
+  <div class="card controles">
+    <label style="flex:1;min-width:220px">Horário da simulação
+      <input type="range" id="tempo" min="0" max="0" value="0" aria-describedby="relogio">
+    </label>
+    <div><div class="relogio" id="relogio" aria-live="polite">--:--</div><div class="muted" id="disp"></div></div>
+    <button id="play" class="sec" aria-pressed="false">▶ Reproduzir</button>
+    <label>Saindo de <select id="origem"></select></label>
+    <label>Indo para <select id="destino"></select></label>
+  </div>
+
+  <div class="grid g2">
+    <div class="card mapa">
+      <h2>Bairros monitorados</h2>
+      <svg id="mapa" viewBox="0 0 680 400" role="img" aria-label="Mapa dos pontos monitorados e vias"></svg>
+      <div class="legenda">
+        <span><i style="background:#22c55e"></i>Risco baixo</span>
+        <span><i style="background:#f59e0b"></i>Risco médio</span>
+        <span><i style="background:#ef4444"></i>Risco alto</span>
+        <span><i style="background:#38bdf8"></i>Rota segura</span>
+        <span>- - - via bloqueada</span>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Sua rota</h2>
+      <div id="rota" aria-live="polite"></div>
+      <h2 style="margin-top:18px">Alertas agora</h2>
+      <div id="alertas" aria-live="polite"></div>
+    </div>
+  </div>
+</main>
+<script src="/static/app.js"></script>
+<script src="/static/mapa.js"></script>
+</body>
+</html>

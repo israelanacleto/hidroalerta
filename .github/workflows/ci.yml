@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+      - name: Pipeline de dados (raw -> silver -> gold) e treino da IA
+        run: python -m bigdata.pipeline --regerar
+      - name: Plano de testes
+        run: python -m pytest -v --junitxml=relatorio-testes.xml
+      - name: Publicar relatório de testes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-testes
+          path: |
+            relatorio-testes.xml
+            ia/artefatos/metricas.json
+            bigdata/lake/silver/qualidade.json
+
+  docker:
+    needs: testes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build da imagem
+        run: docker build -t hidroalerta:${{ github.sha }} .
+      - name: Smoke test do container
+        run: |
+          docker run -d --name hidro -p 8000:8000 -e HIDRO_API_TOKEN=ci-token hidroalerta:${{ github.sha }}
+          for i in $(seq 1 30); do curl -fs http://localhost:8000/api/meta > /dev/null && break; sleep 2; done
+          curl -fs http://localhost:8000/api/kpis | head -c 300
+          test "$(curl -s -o /dev/null -w '%{http_code}' -X POST http://localhost:8000/api/simular -H 'Content-Type: application/json' -d '{}')" = "401"

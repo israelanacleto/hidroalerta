@@ -1,0 +1,78 @@
+{
+  "amostras_treino": 23039,
+  "amostras_teste": 9215,
+  "dias_treino": 10,
+  "dias_teste": 4,
+  "ia": {
+    "acuracia": 0.9666,
+    "recall_ALTO": 0.9745,
+    "precisao_ALTO": 0.8358,
+    "f1_macro": 0.8452,
+    "matriz_confusao": {
+      "labels": [
+        "BAIXO",
+        "MEDIO",
+        "ALTO"
+      ],
+      "valores": [
+        [
+          8396,
+          256,
+          6
+        ],
+        [
+          1,
+          282,
+          39
+        ],
+        [
+          0,
+          6,
+          229
+        ]
+      ]
+    }
+  },
+  "baseline_reativo": {
+    "acuracia": 0.9858,
+    "recall_ALTO": 0.7149,
+    "precisao_ALTO": 1.0,
+    "f1_macro": 0.8815,
+    "matriz_confusao": {
+      "labels": [
+        "BAIXO",
+        "MEDIO",
+        "ALTO"
+      ],
+      "valores": [
+        [
+          8658,
+          0,
+          0
+        ],
+        [
+          64,
+          258,
+          0
+        ],
+        [
+          14,
+          53,
+          168
+        ]
+      ]
+    }
+  },
+  "antecedencia": {
+    "eventos_alagamento": 11,
+    "ia_media_min": 28.6,
+    "reativo_media_min": 0.0,
+    "ia_eventos_com_alerta_previo_pct": 90.9
+  },
+  "importancia_features": {
+    "nivel_cm": 0.76,
+    "chuva_mm_h": 0.0313,
+    "chuva_acum_1h_mm": 0.0079,
+    "tendencia_15min_cm": 0.2007
+  }
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HidroAlerta · Histórico e simulação</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div class="logo">Hidro<span>Alerta</span></div>
+  <nav aria-label="Telas">
+    <a href="/">Mapa e rota segura</a><a href="/sensores">Sensores e alertas</a>
+    <a href="/dashboard">Dashboard</a><a href="/historico">Histórico e simulação</a>
+  </nav>
+</header>
+<main>
+  <h1>Histórico e simulação</h1>
+  <p class="sub">Área do operador: gera um novo dia de chuva, reprocessa o data lake (raw → silver → gold) e mostra como a IA se saiu.</p>
+
+  <div class="grid g2">
+    <form class="card" id="form-sim">
+      <h2>Simular um novo cenário de chuva</h2>
+      <div class="controles">
+        <label>Intensidade da chuva (0,3 a 2,0)
+          <input type="number" name="intensidade" min="0.3" max="2" step="0.1" value="1.3" required></label>
+        <label>Semente (1 a 9999)
+          <input type="number" name="seed" min="1" max="9999" value="7" required></label>
+        <label>Token do operador
+          <input type="password" name="token" autocomplete="off" required></label>
+        <button type="submit">Simular e reprocessar</button>
+      </div>
+      <p id="sim-status" aria-live="polite" class="muted"></p>
+    </form>
+
+    <div class="card">
+      <h2>Qualidade dos dados (raw → silver)</h2>
+      <table id="qualidade"><tbody></tbody></table>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h2>IA vs. sistema reativo (dias de teste)</h2>
+      <table id="comparacao">
+        <thead><tr><th>Métrica</th><th>IA (árvore de decisão)</th><th>Reativo (só nível atual)</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p class="muted">Recall de ALTO = de todas as situações de perigo real, quantas o sistema avisou. É a métrica que importa para a segurança do cidadão.</p>
+    </div>
+    <div class="card">
+      <h2>Matriz de confusão da IA</h2>
+      <table id="matriz"></table>
+      <p class="muted">Linhas = risco real · colunas = risco previsto.</p>
+    </div>
+  </div>
+</main>
+<script src="/static/app.js"></script>
+<script src="/static/historico.js"></script>
+</body>
+</html>

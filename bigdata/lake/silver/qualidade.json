@@ -1,0 +1,8 @@
+{
+  "lidas": 4649,
+  "removidas_nulas": 41,
+  "removidas_fora_da_faixa": 19,
+  "removidas_duplicadas": 41,
+  "lacunas_preenchidas": 60,
+  "linhas_silver": 2303
+}

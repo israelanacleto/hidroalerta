@@ -1,0 +1,10 @@
+services:
+  hidroalerta:
+    build: .
+    image: hidroalerta:latest
+    ports:
+      - "8000:8000"
+    environment:
+      # troque antes de usar: é o token exigido nas rotas de escrita (ingestão e simulação)
+      HIDRO_API_TOKEN: ${HIDRO_API_TOKEN:-troque-este-token}
+    restart: unless-stopped

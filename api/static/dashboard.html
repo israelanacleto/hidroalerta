@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HidroAlerta · Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div class="logo">Hidro<span>Alerta</span></div>
+  <nav aria-label="Telas">
+    <a href="/">Mapa e rota segura</a><a href="/sensores">Sensores e alertas</a>
+    <a href="/dashboard">Dashboard</a><a href="/historico">Histórico e simulação</a>
+  </nav>
+</header>
+<main>
+  <h1>Dashboard de decisão</h1>
+  <p class="sub">Para a Defesa Civil e a prefeitura: onde a drenagem falha, quanto da mobilidade é perdida e com quanta antecedência o alerta chega.</p>
+
+  <form class="card controles" id="filtros">
+    <label>Bairro <select name="bairro"><option value="">Todos</option></select></label>
+    <label>Severidade do alerta <select name="severidade"><option value="">Todas</option>
+      <option value="MEDIO">Médio</option><option value="ALTO">Alto</option></select></label>
+    <label>Das <input type="time" name="inicio" value="12:00"></label>
+    <label>Até <input type="time" name="fim" value="23:55"></label>
+    <button type="submit">Aplicar</button>
+    <button type="button" class="sec" id="limpar">Dia inteiro</button>
+  </form>
+
+  <div class="grid g4">
+    <div class="card kpi"><div class="rotulo">Leituras em nível crítico (≥ 80 cm)</div><div class="valor" id="k-critico">–</div><div class="rotulo" id="k-critico-sub"></div></div>
+    <div class="card kpi"><div class="rotulo">Disponibilidade média de rotas</div><div class="valor" id="k-disp">–</div><div class="rotulo" id="k-disp-sub"></div></div>
+    <div class="card kpi"><div class="rotulo">Antecedência média do alerta</div><div class="valor" id="k-ant">–</div><div class="rotulo" id="k-ant-sub"></div></div>
+    <div class="card kpi"><div class="rotulo">Alertas emitidos</div><div class="valor" id="k-alertas">–</div><div class="rotulo" id="k-alertas-sub"></div></div>
+  </div>
+
+  <div class="grid g3" style="margin-top:16px">
+    <div class="card"><h2>Nível crítico por bairro (%)</h2><div class="chart-box"><canvas id="c-bairro" role="img" aria-label="Percentual de leituras críticas por bairro"></canvas></div></div>
+    <div class="card"><h2>Disponibilidade de rotas (%)</h2><div class="chart-box"><canvas id="c-disp" role="img" aria-label="Disponibilidade de rotas ao longo do tempo"></canvas></div></div>
+    <div class="card"><h2>Alertas por severidade</h2><div class="chart-box"><canvas id="c-sev" role="img" aria-label="Alertas por severidade"></canvas></div></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h2>Alertas no período</h2>
+    <table id="tabela"><thead><tr><th>Hora</th><th>Ponto</th><th>Bairro</th><th>Severidade</th></tr></thead><tbody></tbody></table>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="/static/app.js"></script>
+<script src="/static/dashboard.js"></script>
+</body>
+</html>
